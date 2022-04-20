@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameEnd : MonoBehaviour
 {
     bool gameHasEnded = false;
-
+    private int deaths = 1;
     public float restartDelay = 2f;
 
     public void EndGame()
@@ -12,6 +12,8 @@ public class GameEnd : MonoBehaviour
         Debug.Log("This Far");
         if (gameHasEnded == false)
         {
+            
+            GameManager.Instance.Score += deaths;
             gameHasEnded = true;
             Debug.Log("Game Over");
             Invoke("Restart", restartDelay);
@@ -22,6 +24,6 @@ public class GameEnd : MonoBehaviour
 
     void Restart()
     {
-        EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().name);
+        //EditorSceneManager.LoadScene(EditorSceneManager.GetActiveScene().name);
     }
 }

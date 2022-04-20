@@ -13,11 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask playerMask;
     private IEnumerator coroutine;
 
-    IEnumerator MyCoroutine(Collider2D other)
-    {
-        yield return new WaitForSeconds(5f);
-        other.gameObject.SetActive(true);
-    }
+   
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +67,7 @@ public class Player : MonoBehaviour
         }
         if (rigidbodyComponent.position.y < -2f)
         {
-            Debug.Log("fell");
+            
             FindObjectOfType<GameEnd>().EndGame();
         }
         if (Physics2D.OverlapCircleAll(groundCheckTransform.position, 0.1f, playerMask).Length == 0)
@@ -97,11 +93,8 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.layer == 7) 
         {
-            
-            other.gameObject.SetActive(false);
-
-            coroutine = MyCoroutine(other);
-            StartCoroutine(coroutine);
+            GameManager.Instance.trigger = true;
+            Destroy(other);
         }
     }
 }
